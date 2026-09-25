@@ -1,36 +1,36 @@
-# 打卡监督平台
+# Our Little House
 
-两个人共用一间屋子、一只猫，和同一套家具拼图。各自完成当天的工作、学习或运动，拼图就会多一块。拼满之后，家具或衣服会出现在房间里。
+Two people share one room, one cat, and one furniture puzzle. Each person can finish work, study, or movement once a day, and that adds one piece. When the puzzle is full, the furniture or outfit appears in the room.
 
-界面默认是英文，左上角可以切到中文。
+The interface is English by default. A toggle in the panel switches it to Chinese.
 
-## 本地运行
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-浏览器打开 http://127.0.0.1:5173 。这个端口是固定的，如果提示已被占用，先关掉之前的开发服务再启动。
+Open http://127.0.0.1:5173 . The dev server uses this port only. If it says the port is already in use, stop the previous dev server and start again.
 
-没有配置 Supabase 时，仍然可以在同一台电脑上用两个窗口一起玩。进度存在本机。
+Without Supabase, two windows on the same computer can still share a room. Progress stays on that machine.
 
-## 接上 Supabase
+## Connect Supabase
 
-1. 在 [Supabase](https://supabase.com) 新建一个项目。
-2. 打开 SQL Editor，整段运行 `supabase/schema.sql`。
-3. 在 Authentication 里启用 Email 登录。如果希望注册后立刻进门，可以关掉 Confirm email。
-4. 把项目地址和 anon key 写进 `.env`（不要提交这个文件）：
+1. Create a project at [Supabase](https://supabase.com).
+2. In the SQL Editor, run all of `supabase/schema.sql`.
+3. Turn on Email login under Authentication. Turn off Confirm email if a new account should enter immediately after signing up.
+4. Put the project URL and anon key in `.env`. Do not commit this file.
 
 ```bash
-VITE_SUPABASE_URL=你的项目地址
-VITE_SUPABASE_ANON_KEY=你的 anon key
+VITE_SUPABASE_URL=your-project-url
+VITE_SUPABASE_ANON_KEY=your-anon-key
 ```
 
-可以先复制 `.env.example`，再改成自己的值。改完 `.env` 之后需要重新运行 `npm run dev`。
+Copy `.env.example` and replace the values. Restart `npm run dev` after changing `.env`.
 
-登录之后，建房、进房和打卡都会记在当前账号的用户 ID 上。换设备登录，还能回到原来的房间和拼图。创建房间会得到一个 6 位邀请码，链接形如 `/room/123456`。
+After login, creating a home, joining a room, and checking in are stored under that account’s user id. Signing in on another device brings back the same room and puzzle. A new home gets a 6-digit invite code, and the link looks like `/room/123456`.
 
-## 一天怎么算
+## What counts as a day
 
-打卡日界是上海时间凌晨 4 点。每个模块每天每人只能「搞定啦」一次，得到 1 块碎片。「今天歇了」只是休息，不扣已经拼上的碎片。
+The check-in day starts at 4:00 AM in Asia/Shanghai. Each person can mark a module “Nailed It!” once per day and receive one piece. “Resting Today” does not remove pieces already earned.
